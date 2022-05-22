@@ -21,7 +21,7 @@ function App() {
     }
   
     if (!values.steps) {
-      errors.email = 'Required';
+      errors.steps = 'Required';
     } 
   
     return errors;
@@ -36,6 +36,10 @@ function App() {
         new_arr.sort((a, b) => {
           return b.steps - a.steps;
       });
+      if (new_arr.length>10){
+        let update_arr = new_arr.slice(0,10)
+        return update_arr
+      }
       return new_arr
         
       })
@@ -99,7 +103,7 @@ function App() {
         <input
           id="steps"
           name="steps"
-          type="steps"
+          type="number"
           onChange={formik.handleChange}
           value={formik.values.steps}
         />
@@ -107,7 +111,7 @@ function App() {
 
         <button type="submit">Submit</button>
       </form>
-      <div>
+      <div className="App">
           <h2>LEADERBOARD</h2>
           {leaderBoard.map((item, index)=>(<div key={index}>
             <p>{item.name}</p>
